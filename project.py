@@ -1,24 +1,32 @@
 from abc import ABC, abstractmethod
 
-class Hewan(ABC):
-    def __init__(self, nama, jenis):
-        self.nama = nama
-        self.jenis = jenis
-
+class BisaMakan(ABC):
+    @abstractmethod
     def makan(self):
-        print(f"{self.nama} sedang makan.")
-        
-    @abstractmethod      
+        pass
+
+class BisaBergerak(ABC):
+    @abstractmethod
     def bergerak(self):
         pass
 
-class HewanTerbang(Hewan):
+class HewanTerbang(BisaMakan, BisaBergerak):
+    def __init__(self, nama):
+        self.nama = nama
+
     def bergerak(self):
         print(f"{self.nama} sedang terbang.")
+    def makan(self):
+        print(f"{self.nama} sedang makan.")
 
-class HewanDarat(Hewan):
+class HewanDarat(BisaMakan, BisaBergerak):
+    def __init__(self, nama):
+        self.nama = nama
+
     def bergerak(self):
         print(f"{self.nama} sedang berjalan.")
+    def makan(self):
+        print(f"(self.nama) sedang makan.")
         
 class Kandang:
     def __init__(self):
@@ -43,3 +51,4 @@ class PerawatanHewan:
         for hewan in self.kandang.hewan_list:
             hewan.makan()
             hewan.bergerak()
+        
